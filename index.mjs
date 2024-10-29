@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config({path: '.env'});
 
 const app = express();
-const PORT = 3001;
+const PORT =  process.env.PORT || 3001;
 
 app.use(cors({ origin: '*' }));
 app.use(express.json());
@@ -14,8 +14,13 @@ const botToken = process.env.TELEGRAM_BOT_TOKEN;
 const channelId = process.env.TELEGRAM_CHANNEL_ID;
 
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the Quiz Master Backend!');
+});
 
-// POST route to send quiz result to Telegram
+
+
+
 app.post('/send-notification', async (req, res) => {
   const { message } = req.body;
 
